@@ -1,5 +1,0 @@
-Telecommunication Student
-name: Milan
-surname: Fuchs
-year of birth: 1999
-marks: 1, 3, 5
