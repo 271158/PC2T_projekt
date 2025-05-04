@@ -1,7 +1,20 @@
 import java.util.Scanner;
 
 public class App {
-    public static void main(String[] args) {
+	public static int pouzeCelaCisla(Scanner sc) {
+		int cislo = 0;
+		try	{
+			cislo = sc.nextInt();
+		}
+		catch(Exception e) {
+			System.out.println("error - enter a number: ");
+			sc.nextLine();
+			cislo = pouzeCelaCisla(sc);
+		}
+		return cislo;
+	}
+	
+	public static void main(String[] args) {
         Integer newID;
         Integer id;
         String name;
@@ -27,7 +40,7 @@ public class App {
             System.out.println("10 ... import student from file");
             System.out.println(" 0 ... quit");
 
-            Integer choice = scanner.nextInt();
+            Integer choice = pouzeCelaCisla(scanner);
             String group;
             switch(choice)
             {
@@ -41,7 +54,7 @@ public class App {
                     System.out.println("Enter student surname");
                     surname = scanner.next();
                     System.out.println("Enter student year of birth");
-                    yearOfBirth = scanner.nextInt();
+                    yearOfBirth = pouzeCelaCisla(scanner);
                     if(group.equals("t")) {
                         database.setStudent(newID, new TelecommunicationStudent(newID, name, surname, yearOfBirth));
                     }else if(group.equals("c")) {
@@ -51,9 +64,9 @@ public class App {
                     break;
                 case 2:
                     System.out.println("Enter student ID");
-                    id = scanner.nextInt();
+                    id = pouzeCelaCisla(scanner);
                     System.out.println("Enter new mark");
-                    Integer mark = scanner.nextInt();
+                    Integer mark = pouzeCelaCisla(scanner);
                     try {
                         database.addMark(id, mark);
                     }catch(Exception e) {
@@ -62,7 +75,7 @@ public class App {
                     break;
                 case 3:
                     System.out.println("Enter student ID");
-                    id = scanner.nextInt();
+                    id = pouzeCelaCisla(scanner);
                     try {
                         database.removeStudent(id);
                     }catch(Exception e) {
@@ -72,7 +85,7 @@ public class App {
                     break;
                 case 4:
                     System.out.println("Enter student ID");
-                    id = scanner.nextInt();
+                    id = pouzeCelaCisla(scanner);
                     try {
                         System.out.println("name: " + database.getStudent(id).getName());
                         System.out.println("surname: " + database.getStudent(id).getSurname());
@@ -84,7 +97,7 @@ public class App {
                     break;
                 case 5:
                     System.out.println("Enter student ID");
-                    id = scanner.nextInt();
+                    id = pouzeCelaCisla(scanner);
                     try {
                         database.getStudent(id).skill();
                     }catch(Exception e) {
@@ -117,7 +130,7 @@ public class App {
                     break;
                 case 9:
                     System.out.println("Enter student ID");
-                    id = scanner.nextInt();
+                    id = pouzeCelaCisla(scanner);
                     try {
                         if (FileIO.writeStudent(database.getStudent(id))) {
                             System.out.println("Student saved to file");
